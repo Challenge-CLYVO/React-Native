@@ -1,9 +1,13 @@
 import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 import Home from "./src/screens/home";
 import CadastroPet from "./src/screens/CadastroPet";
 import Lembretes from "./src/screens/Lembretes";
 import ListaPets from "./src/screens/ListaPets";
 import Perfil from "./src/screens/Perfil";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
