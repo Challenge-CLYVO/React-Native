@@ -2,10 +2,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Home from "./src/screens/Home";
-import CadastroPet from "./src/screens/CadastroPetScreen";
-import ListaPets from "./src/screens/ListaPetsScreen";
-import Lembretes from "./src/screens/LembretesScreen";
-import Perfil from "./src/screens/PerfilScreen";
+import CadastroPet from "./src/screens/CadastroPet";
+import ListaPets from "./src/screens/ListaPets";
+import Lembretes from "./src/screens/Lembretes";
+import Perfil from "./src/screens/Perfil";
 
 const Stack = createNativeStackNavigator();
 
