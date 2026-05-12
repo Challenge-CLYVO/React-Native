@@ -7,29 +7,34 @@ export default function CadastroPetScreen() {
   const [idade, setIdade] = useState('');
 
   const handleSalvar = async () => {
-  try {
-    console.log("CLICOU SALVAR");
+    try {
+      if (!nome) {
+        Alert.alert('Erro', 'Digite o nome do pet');
+        return;
+      }
 
-    const pets = await buscarPets();
-    console.log("PETS ATUAIS:", pets);
+      const pets = await buscarPets();
 
-    const novoPet = {
-      id: Date.now().toString(),
-      nome,
-      idade
-    };
+      const novoPet = {
+        id: Date.now().toString(),
+        nome,
+        idade
+      };
 
-    const novaLista = [...pets, novoPet];
+      const novaLista = [...pets, novoPet];
 
-    await salvarPets(novaLista);
+      await salvarPets(novaLista);
 
-    console.log("SALVOU:", novaLista);
+      Alert.alert('Sucesso', 'Pet salvo!');
 
-    Alert.alert('Sucesso', 'Pet salvo!');
-  } catch (e) {
-    console.log("ERRO:", e);
-  }
-};
+      setNome('');
+      setIdade('');
+
+    } catch (e) {
+      console.log("ERRO:", e);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>🐶 Cadastro de Pet</Text>

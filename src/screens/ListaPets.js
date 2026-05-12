@@ -1,7 +1,7 @@
-import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { View, Text, FlatList, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useState, useCallback } from 'react';
 import { useFocusEffect } from '@react-navigation/native';
-import { buscarPets } from '../services/petsStorage';
+import { buscarPets, salvarPets } from '../services/petsStorage';
 
 export default function ListaPetsScreen() {
   const [pets, setPets] = useState([]);
@@ -17,6 +17,27 @@ export default function ListaPetsScreen() {
     }, [])
   );
 
+  // 🔥 função remover
+  const removerPet = (id) => {
+    Alert.alert(
+      'Remover',
+      'Deseja excluir este pet?',
+      [
+        { text: 'Cancelar', style: 'cancel' },
+        {
+          text: 'Excluir',
+          style: 'destructive',
+          onPress: async () => {
+            const novaLista = pets.filter(p => p.id !== id);
+
+            setPets(novaLista);
+            await salvarPets(novaLista);
+          }
+        }
+      ]
+    );
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>🐾 Meus Pets</Text>
@@ -25,23 +46,33 @@ export default function ListaPetsScreen() {
         data={pets}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
+
         ListEmptyComponent={
           <Text style={{ textAlign: 'center', color: '#777' }}>
             Nenhum pet cadastrado 🐾
           </Text>
         }
+
         renderItem={({ item }) => (
           <View style={styles.card}>
             <View style={styles.avatar}>
               <Text style={styles.avatarText}>🐶</Text>
             </View>
 
-            <View>
+            <View style={{ flex: 1 }}>
               <Text style={styles.nome}>{item.nome}</Text>
               <Text style={styles.subtext}>
                 {item.idade ? `${item.idade} anos` : 'Idade não informada'}
               </Text>
             </View>
+
+            {/* 🔥 BOTÃO EXCLUIR */}
+            <TouchableOpacity
+              style={styles.deleteButton}
+              onPress={() => removerPet(item.id)}
+            >
+              <Text style={styles.deleteText}>🗑️</Text>
+            </TouchableOpacity>
           </View>
         )}
       />
@@ -95,5 +126,12 @@ const styles = StyleSheet.create({
   subtext: {
     color: '#777',
     fontSize: 13
+  },
+  deleteButton: {
+    padding: 8
+  },
+  
+  deleteText: {
+    fontSize: 18
   }
 });
