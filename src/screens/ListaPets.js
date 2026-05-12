@@ -16,8 +16,7 @@ export default function ListaPetsScreen() {
       carregarPets();
     }, [])
   );
-
-  // 🔥 função remover
+  
   const removerPet = (id) => {
     Alert.alert(
       'Remover',
@@ -66,7 +65,6 @@ export default function ListaPetsScreen() {
               </Text>
             </View>
 
-            {/* 🔥 BOTÃO EXCLUIR */}
             <TouchableOpacity
               style={styles.deleteButton}
               onPress={() => removerPet(item.id)}

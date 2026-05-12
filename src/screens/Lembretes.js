@@ -27,7 +27,7 @@ export default function LembretesScreen() {
       }
 
       const novo = {
-        id: Date.now().toString() + Math.random().toString(), // 🔥 ID seguro
+        id: Date.now().toString() + Math.random().toString(),
         titulo,
         data
       };
@@ -69,7 +69,6 @@ export default function LembretesScreen() {
       <View style={styles.container}>
         <Text style={styles.title}>⏰ Lembretes</Text>
 
-        {/* FORM CARD */}
         <View style={styles.formCard}>
           <TextInput
             placeholder="Título (ex: Vacina)"
@@ -90,7 +89,6 @@ export default function LembretesScreen() {
           </TouchableOpacity>
         </View>
 
-        {/* LISTA */}
         <FlatList
           data={lembretes}
           keyExtractor={(item) => item.id}
