@@ -8,14 +8,22 @@ export default function ListaPetsScreen() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Meus Pets</Text>
+      <Text style={styles.title}>🐾 Meus Pets</Text>
 
       <FlatList
         data={pets}
         keyExtractor={(item) => item.id}
+        showsVerticalScrollIndicator={false}
         renderItem={({ item }) => (
           <View style={styles.card}>
-            <Text style={styles.text}> {item.nome}</Text>
+            <View style={styles.avatar}>
+              <Text style={styles.avatarText}>🐶</Text>
+            </View>
+
+            <View>
+              <Text style={styles.nome}>{item.nome}</Text>
+              <Text style={styles.subtext}>Pet cadastrado</Text>
+            </View>
           </View>
         )}
       />
@@ -24,15 +32,50 @@ export default function ListaPetsScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#f2f6ff', padding: 20 },
-  title: { fontSize: 22, fontWeight: 'bold', marginBottom: 20 },
-
-  card: {
-    backgroundColor: '#fff',
-    padding: 15,
-    borderRadius: 10,
-    marginBottom: 10
+  container: {
+    flex: 1,
+    backgroundColor: '#f4f6fb',
+    padding: 20
   },
 
-  text: { fontSize: 16 }
+  title: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20
+  },
+
+  card: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    padding: 15,
+    borderRadius: 14,
+    marginBottom: 12,
+    elevation: 2
+  },
+
+  avatar: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#4a90e2',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 15
+  },
+
+  avatarText: {
+    fontSize: 20,
+    color: '#fff'
+  },
+
+  nome: {
+    fontSize: 18,
+    fontWeight: '600'
+  },
+
+  subtext: {
+    color: '#777',
+    fontSize: 13
+  }
 });
