@@ -62,14 +62,21 @@ Todos os dados são armazenados localmente utilizando **AsyncStorage**, garantin
 /src
 
   /screens
+
     Home.js
+
     CadastroPetScreen.js
+
     ListaPetsScreen.js
+
     LembretesScreen.js
+
     PerfilScreen.js
 
   /services
+
     petsStorage.js
+
     lembretesStorage.js
 
 App.js
