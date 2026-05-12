@@ -1,10 +1,35 @@
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
 import { useState } from 'react';
+import { salvarPets, buscarPets } from './../services/petsStorage';
 
 export default function CadastroPetScreen() {
   const [nome, setNome] = useState('');
   const [idade, setIdade] = useState('');
 
+  const handleSalvar = async () => {
+  try {
+    console.log("CLICOU SALVAR");
+
+    const pets = await buscarPets();
+    console.log("PETS ATUAIS:", pets);
+
+    const novoPet = {
+      id: Date.now().toString(),
+      nome,
+      idade
+    };
+
+    const novaLista = [...pets, novoPet];
+
+    await salvarPets(novaLista);
+
+    console.log("SALVOU:", novaLista);
+
+    Alert.alert('Sucesso', 'Pet salvo!');
+  } catch (e) {
+    console.log("ERRO:", e);
+  }
+};
   return (
     <View style={styles.container}>
       <Text style={styles.title}>🐶 Cadastro de Pet</Text>
@@ -26,7 +51,7 @@ export default function CadastroPetScreen() {
         keyboardType="numeric"
       />
 
-      <TouchableOpacity style={styles.button}>
+      <TouchableOpacity style={styles.button} onPress={handleSalvar}>
         <Text style={styles.buttonText}>Salvar</Text>
       </TouchableOpacity>
 

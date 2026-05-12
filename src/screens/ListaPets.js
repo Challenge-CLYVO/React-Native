@@ -1,10 +1,21 @@
 import { View, Text, FlatList, StyleSheet } from 'react-native';
+import { useState, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
+import { buscarPets } from '../services/petsStorage';
 
 export default function ListaPetsScreen() {
-  const pets = [
-    { id: '1', nome: 'Rex' },
-    { id: '2', nome: 'Luna' }
-  ];
+  const [pets, setPets] = useState([]);
+
+  const carregarPets = async () => {
+    const data = await buscarPets();
+    setPets(data);
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      carregarPets();
+    }, [])
+  );
 
   return (
     <View style={styles.container}>
@@ -14,6 +25,11 @@ export default function ListaPetsScreen() {
         data={pets}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
+        ListEmptyComponent={
+          <Text style={{ textAlign: 'center', color: '#777' }}>
+            Nenhum pet cadastrado 🐾
+          </Text>
+        }
         renderItem={({ item }) => (
           <View style={styles.card}>
             <View style={styles.avatar}>
@@ -22,7 +38,9 @@ export default function ListaPetsScreen() {
 
             <View>
               <Text style={styles.nome}>{item.nome}</Text>
-              <Text style={styles.subtext}>Pet cadastrado</Text>
+              <Text style={styles.subtext}>
+                {item.idade ? `${item.idade} anos` : 'Idade não informada'}
+              </Text>
             </View>
           </View>
         )}
