@@ -1,51 +1,26 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
-export default function Home({ navigation }) {
+import Home from "./src/screens/Home";
+import CadastroPet from "./src/screens/CadastroPet";
+import ListaPets from "./src/screens/ListaPets";
+import Lembretes from "./src/screens/Lembretes";
+import Perfil from "./src/screens/Perfil";
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Pet Care</Text>
+    <NavigationContainer>
+      <Stack.Navigator>
 
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CadastroPet')}>
-        <Text style={styles.buttonText}>Cadastrar Pet</Text>
-      </TouchableOpacity>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="CadastroPet" component={CadastroPet} />
+        <Stack.Screen name="ListaPets" component={ListaPets} />
+        <Stack.Screen name="Lembretes" component={Lembretes} />
+        <Stack.Screen name="Perfil" component={Perfil} />
 
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ListaPets')}>
-        <Text style={styles.buttonText}>Lista de Pets</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Lembretes')}>
-        <Text style={styles.buttonText}>Lembretes</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Perfil')}>
-        <Text style={styles.buttonText}>Perfil</Text>
-      </TouchableOpacity>
-    </View>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#f2f6ff',
-    justifyContent: 'center',
-    padding: 20
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 30
-  },
-  button: {
-    backgroundColor: '#4a90e2',
-    padding: 15,
-    borderRadius: 12,
-    marginBottom: 12
-  },
-  buttonText: {
-    color: '#fff',
-    textAlign: 'center',
-    fontWeight: 'bold'
-  }
-});

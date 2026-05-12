@@ -1,29 +1,51 @@
-import { View, Text, Button } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 export default function Home({ navigation }) {
   return (
-    <View>
-      <Text>Home</Text>
+    <View style={styles.container}>
+      <Text style={styles.title}>Pet Care</Text>
 
-      <Button
-        title="Cadastro Pet"
-        onPress={() => navigation.navigate('CadastroPet')}
-      />
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('CadastroPet')}>
+        <Text style={styles.buttonText}>Cadastrar Pet</Text>
+      </TouchableOpacity>
 
-      <Button
-        title="Lista Pets"
-        onPress={() => navigation.navigate('ListaPets')}
-      />
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('ListaPets')}>
+        <Text style={styles.buttonText}>Lista de Pets</Text>
+      </TouchableOpacity>
 
-      <Button
-        title="Lembretes"
-        onPress={() => navigation.navigate('Lembretes')}
-      />
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Lembretes')}>
+        <Text style={styles.buttonText}>Lembretes</Text>
+      </TouchableOpacity>
 
-      <Button
-        title="Perfil"
-        onPress={() => navigation.navigate('Perfil')}
-      />
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Perfil')}>
+        <Text style={styles.buttonText}>Perfil</Text>
+      </TouchableOpacity>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f2f6ff',
+    justifyContent: 'center',
+    padding: 20
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 30
+  },
+  button: {
+    backgroundColor: '#4a90e2',
+    padding: 15,
+    borderRadius: 12,
+    marginBottom: 12
+  },
+  buttonText: {
+    color: '#fff',
+    textAlign: 'center',
+    fontWeight: 'bold'
+  }
+});
