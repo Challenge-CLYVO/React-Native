@@ -60,16 +60,17 @@ Todos os dados são armazenados localmente utilizando **AsyncStorage**, garantin
 ## 📂 Estrutura do Projeto
 
 /src
- /screens
-  Home.js
-  CadastroPetScreen.js
-  ListaPetsScreen.js
-  LembretesScreen.js
-  PerfilScreen.js
 
- /services
-  petsStorage.js
-  lembretesStorage.js
+  /screens
+    Home.js
+    CadastroPetScreen.js
+    ListaPetsScreen.js
+    LembretesScreen.js
+    PerfilScreen.js
+
+  /services
+    petsStorage.js
+    lembretesStorage.js
 
 App.js
 
